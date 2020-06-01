@@ -1,3 +1,4 @@
+#include "mppch.h"
 #include "Log.h"
 
 namespace Murphy
@@ -9,7 +10,7 @@ namespace Murphy
     {
         spdlog::set_pattern("%^[%T] %n: %v%$");
 
-        s_CoreLogger = spdlog::stdout_color_mt("MURPY");
+        s_CoreLogger = spdlog::stdout_color_mt("MURPHY");
         s_CoreLogger->set_level(spdlog::level::trace);
 
         s_ClientLogger = spdlog::stdout_color_mt("CLIENT");

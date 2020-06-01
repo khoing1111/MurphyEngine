@@ -19,6 +19,9 @@ project "Murphy"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "mppch.h"
+    pchsource "Murphy/src/mppch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -28,7 +31,8 @@ project "Murphy"
     includedirs
     {
         "%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/vendor/SFML-2.5.1/include"
+        "%{prj.name}/vendor/SFML-2.5.1/include",
+        "%{prj.name}/src"
     }
 
     libdirs

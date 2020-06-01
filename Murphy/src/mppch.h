@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+#include <SFML/Graphics.hpp>
+
 #ifdef MP_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

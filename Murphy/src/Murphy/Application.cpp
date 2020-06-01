@@ -1,6 +1,5 @@
+#include "mppch.h"
 #include "Application.h"
-
-#include <SFML/Graphics.hpp>
 
 namespace Murphy
 {
