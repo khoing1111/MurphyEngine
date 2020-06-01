@@ -30,12 +30,18 @@
     <ClInclude Include="src\Murphy\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\mppch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Murphy\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mppch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
