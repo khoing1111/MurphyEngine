@@ -35,18 +35,23 @@ namespace Murphy
 #define MP_LOG_ERROR(...) ::Murphy::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define MP_LOG_FATAL(...) ::Murphy::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
-#ifdef MP_RELEASE_NAKED
-
-    // Strip out logs on naked release
+#if define MP_RELEASE || define MP_DIST
+    // Strip out low level logs on release
+    #define MP_CORELOG_WARN
     #define MP_CORELOG_TRACE
     #define MP_CORELOG_INFO
-    #define MP_CORELOG_WARN
-    #define MP_CORELOG_ERROR
-    #define MP_CORELOG_FATAL
+
+    #define MP_LOG_WARN
     #define MP_LOG_TRACE
     #define MP_LOG_INFO
-    #define MP_LOG_WARN
+#endif
+
+
+#ifdef MP_DIST
+    // Strip all logs on distribution release
+    #define MP_CORELOG_ERROR
+    #define MP_CORELOG_FATAL
+
     #define MP_LOG_ERROR
     #define MP_LOG_FATAL
-
 #endif
