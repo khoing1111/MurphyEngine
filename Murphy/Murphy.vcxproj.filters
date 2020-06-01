@@ -27,9 +27,15 @@
     <ClInclude Include="src\Murphy\EntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Murphy\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
