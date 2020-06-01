@@ -35,7 +35,7 @@ namespace Murphy
 #define MP_LOG_ERROR(...) ::Murphy::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define MP_LOG_FATAL(...) ::Murphy::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
-#if define MP_RELEASE || define MP_DIST
+#if defined(MP_RELEASE) || defined(MP_DIST)
     // Strip out low level logs on release
     #define MP_CORELOG_WARN
     #define MP_CORELOG_TRACE
@@ -54,4 +54,12 @@ namespace Murphy
 
     #define MP_LOG_ERROR
     #define MP_LOG_FATAL
+#endif
+
+#ifdef MP_ENABLE_ASSERTS
+    #define MP_ASSERT(x, ...) { if(!(x)) { MP_LOG_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+    #define MP_COREASSERT(x, ...) { if(!(x)) { MP_CORELOG_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+    #define MP_ASSERT(x, ...)
+    #define MP_COREASSERT(x, ...)
 #endif

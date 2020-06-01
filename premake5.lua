@@ -59,7 +59,7 @@ project "Murphy"
 
     filter "configurations:Debug"
         symbols "On"
-        defines "MP_DEBUG"
+        defines {"MP_DEBUG", "MP_ENABLE_ASSERTS"}
         links {"sfml-graphics-d", "sfml-window-d", "sfml-system-d"} 
 
     filter "configurations:Release"
