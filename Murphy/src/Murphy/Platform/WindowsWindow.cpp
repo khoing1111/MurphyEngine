@@ -11,6 +11,7 @@ namespace Murphy
     WindowsWindow::WindowsWindow(const WindowProps& props)
     {
         m_Window = new sf::RenderWindow(sf::VideoMode(props.Width, props.Height), props.Title);
+        ImGui::SFML::Init(*m_Window);
     }
 
     WindowsWindow::~WindowsWindow()

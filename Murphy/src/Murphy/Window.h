@@ -4,6 +4,8 @@
 #include "IO/Event.h"
 #include <functional>
 
+#include <SFML/System/Clock.hpp>
+
 namespace Murphy
 {
     struct WindowProps
@@ -28,7 +30,7 @@ namespace Murphy
         virtual bool IsOpend() const = 0;
 
         // Action
-        virtual void OnUpdate() const = 0;
+        virtual void OnUpdate(sf::Clock&) const = 0;
         virtual void Close() const = 0;
 
         void PushEventDispatcher(IO::EventDispatcher* dispatcher)

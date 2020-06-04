@@ -2,32 +2,35 @@
 #include "Application.h"
 #include "IO/WindowEvents.h"
 
+#include <SFML/System/Clock.hpp>
+
 
 namespace Murphy
 {
-#define BIND_EVENT_HANDLER(x) std::bind(&x, this, std::placeholders::_1)
-
     Application::Application()
     {
         m_Window = MP_UPTR<Window>(
             Window::Create(WindowProps("MURPHY ENGINE", 1280, 720))
         );
 
-        auto anyEventHandler = BIND_EVENT_HANDLER(Application::OnEvent);
-        auto anyEventDispatcher = new IO::AnyEventDispatcher(anyEventHandler);
+        auto anyEventDispatcher = new IO::AnyEventDispatcher(
+            std::bind(&Application::OnEvent, this, std::placeholders::_1)
+        );
+
         m_Window->PushEventDispatcher(anyEventDispatcher);
 
     }
 
     Application::~Application()
     {
+        m_Window->Close();
     }
 
     bool Application::OnEvent(IO::Event& event)
     {
         if (event.Is(IO::EventType::WindowClosed))
         {
-            m_Window->Close();
+            m_IsRunning = false;
             return false;
         }
 
@@ -35,18 +38,21 @@ namespace Murphy
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
         {
             if (!event.IsPropagating())
-                break;
+                return false;
 
             (*--it)->OnEvent(event);
         }
+
+        return true;
     }
 
     void Application::Run()
     {
-        while (m_Window->IsOpend())
+        sf::Clock deltaClock;
+        while (m_IsRunning && m_Window->IsOpend())
         {
             // This will poll events from window and propagate it to dispatcher
-            m_Window->OnUpdate();
+            m_Window->OnUpdate(deltaClock);
 
             // Update Layers Logic
             for (Layer* layer : m_LayerStack)

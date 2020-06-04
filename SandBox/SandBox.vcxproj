@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MP_PLATFORM_WINDOWS;MP_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\vendor\imgui-1.76\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -101,7 +101,7 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MP_PLATFORM_WINDOWS;MP_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\vendor\imgui-1.76\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -127,7 +127,7 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MP_PLATFORM_WINDOWS;MP_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Murphy\vendor\spdlog\include;..\Murphy\vendor\SFML-2.5.1\include;..\Murphy\vendor\imgui-1.76\include;..\Murphy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -154,6 +154,9 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
   <ItemGroup>
     <ProjectReference Include="..\Murphy\Murphy.vcxproj">
       <Project>{AADD01C4-967F-2C9A-7F3A-40EE6B7BB3EA}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Murphy\vendor\imgui-1.76\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,6 +11,8 @@ workspace "Murphy"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+include "Murphy/vendor/imgui-1.76"
+
 project "Murphy"
     location "Murphy"
     kind "SharedLib"
@@ -32,12 +34,19 @@ project "Murphy"
     {
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/SFML-2.5.1/include",
+        "%{prj.name}/vendor/imgui-1.76/include",
         "%{prj.name}/src"
     }
 
     libdirs
     {
         "%{prj.name}/vendor/SFML-2.5.1/lib"
+    }
+
+    links
+    {
+        "ImGui",
+        "Opengl32.lib"
     }
 
     filter "system:windows"
@@ -85,6 +94,7 @@ project "Sandbox"
     {
         "Murphy/vendor/spdlog/include",
         "Murphy/vendor/SFML-2.5.1/include",
+        "Murphy/vendor/imgui-1.76/include",
         "Murphy/src"
     }
 
@@ -95,7 +105,8 @@ project "Sandbox"
 
     links
     {
-        "Murphy"
+        "Murphy",
+        "ImGui"
     }
 
     filter "system:windows"
