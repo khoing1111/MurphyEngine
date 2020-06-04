@@ -19,7 +19,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Murphy</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -93,10 +93,6 @@
       <AdditionalLibraryDirectories>vendor\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Debug-windows-x86_64\Murphy\Murphy.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)
-IF EXIST vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -121,10 +117,6 @@ IF EXIST vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I vendor\SFML-2.5.1\bin\* ..\
       <AdditionalLibraryDirectories>vendor\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Release-windows-x86_64\Murphy\Murphy.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)
-IF EXIST vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
@@ -149,22 +141,28 @@ IF EXIST vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I vendor\SFML-2.5.1\bin\* ..\
       <AdditionalLibraryDirectories>vendor\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\bin\Dist-windows-x86_64\Murphy\Murphy.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)
-IF EXIST vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Murphy.h" />
     <ClInclude Include="src\Murphy\Application.h" />
     <ClInclude Include="src\Murphy\Core.h" />
     <ClInclude Include="src\Murphy\EntryPoint.h" />
+    <ClInclude Include="src\Murphy\IO\Event.h" />
+    <ClInclude Include="src\Murphy\IO\MouseEvents.h" />
+    <ClInclude Include="src\Murphy\IO\WindowEvents.h" />
+    <ClInclude Include="src\Murphy\Layer.h" />
+    <ClInclude Include="src\Murphy\LayerStack.h" />
     <ClInclude Include="src\Murphy\Log.h" />
+    <ClInclude Include="src\Murphy\Platform\WindowsWindow.h" />
+    <ClInclude Include="src\Murphy\Window.h" />
     <ClInclude Include="src\mppch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Murphy\Application.cpp" />
+    <ClCompile Include="src\Murphy\Layer.cpp" />
+    <ClCompile Include="src\Murphy\LayerStack.cpp" />
     <ClCompile Include="src\Murphy\Log.cpp" />
+    <ClCompile Include="src\Murphy\Platform\WindowsWindow.cpp" />
     <ClCompile Include="src\mppch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

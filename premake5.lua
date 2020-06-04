@@ -43,18 +43,12 @@ project "Murphy"
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
-        systemversion "10.0.18362.0"
+        systemversion "latest"
 
         defines
         {
             "MP_PLATFORM_WINDOWS",
             "MP_BUILD_DLL"
-        }
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-            ("{COPY} vendor/SFML-2.5.1/bin/* ../bin/" .. outputdir .. "/Sandbox")
         }
 
     filter "configurations:Debug"
@@ -107,8 +101,14 @@ project "Sandbox"
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
-        systemversion "10.0.18362.0"
+        systemversion "latest"
         defines "MP_PLATFORM_WINDOWS"
+
+        postbuildcommands
+        {
+            ("{COPY} ../bin/" .. outputdir .. "/Murphy/Murphy.dll ../bin/" .. outputdir .. "/Sandbox"),
+            ("{COPY} ../Murphy/vendor/SFML-2.5.1/bin/* ../bin/" .. outputdir .. "/Sandbox")
+        }
 
     filter "configurations:Debug"
         symbols "On"

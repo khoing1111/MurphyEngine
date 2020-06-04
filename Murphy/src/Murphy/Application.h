@@ -1,6 +1,11 @@
 #pragma once
 
 #include "Core.h"
+#include "Layer.h"
+#include "LayerStack.h" 
+#include "Window.h"
+#include "IO/Event.h"
+#include "IO/WindowEvents.h"
 
 namespace Murphy 
 {
@@ -11,6 +16,17 @@ namespace Murphy
         virtual ~Application();
         
         void Run();
+
+        void PushLayer(Layer* layer);
+        void PushOverlay(Layer* overlay);
+        void PopLayer(Layer* layer);
+        void PopOverlay(Layer* layer);
+
+        bool OnEvent(IO::Event& event);
+
+    private:
+        LayerStack m_LayerStack;
+        MP_UPTR<Window> m_Window;
     };
 
 

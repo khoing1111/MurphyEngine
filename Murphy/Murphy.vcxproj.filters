@@ -4,6 +4,12 @@
     <Filter Include="Murphy">
       <UniqueIdentifier>{AADD01C4-967F-2C9A-7F3A-40EE6B7BB3EA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Murphy\IO">
+      <UniqueIdentifier>{11C7EE49-7D31-A3C0-C66F-546632198115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Murphy\Platform">
+      <UniqueIdentifier>{3E191D3F-AAA4-8A03-B3B5-0DF81FC0E603}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Murphy.h" />
@@ -16,7 +22,28 @@
     <ClInclude Include="src\Murphy\EntryPoint.h">
       <Filter>Murphy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\IO\Event.h">
+      <Filter>Murphy\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\IO\MouseEvents.h">
+      <Filter>Murphy\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\IO\WindowEvents.h">
+      <Filter>Murphy\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Layer.h">
+      <Filter>Murphy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\LayerStack.h">
+      <Filter>Murphy</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Log.h">
+      <Filter>Murphy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Platform\WindowsWindow.h">
+      <Filter>Murphy\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Window.h">
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\mppch.h" />
@@ -25,8 +52,17 @@
     <ClCompile Include="src\Murphy\Application.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Murphy\Layer.cpp">
+      <Filter>Murphy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\LayerStack.cpp">
+      <Filter>Murphy</Filter>
+    </ClCompile>
     <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Murphy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Platform\WindowsWindow.cpp">
+      <Filter>Murphy\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\mppch.cpp" />
   </ItemGroup>
