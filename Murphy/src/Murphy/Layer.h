@@ -14,12 +14,15 @@ namespace Murphy
         virtual void OnAttach() {}
         virtual void OnDetach() {}
         virtual void OnUpdate() {}
+        virtual void OnPreRun() {}
         virtual void OnEvent(IO::Event& event) 
         {
             m_EventDispatcherStack.PropagateEvent(event);
         }
 
         inline const std::string& GetName() const { return m_DebugName; }
+        void PushEventDispatcher(IO::EventDispatcher* dispatcher);
+        void PopEventDispatcher(IO::EventDispatcher* dispatcher);
 
     private:
         std::string m_DebugName;

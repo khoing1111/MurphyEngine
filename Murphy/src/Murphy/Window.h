@@ -28,9 +28,12 @@ namespace Murphy
         virtual unsigned int GetWidth() const = 0;
         virtual unsigned int GetHeight() const = 0;
         virtual bool IsOpend() const = 0;
+        virtual bool HasFocus() const = 0;
 
         // Action
         virtual void OnUpdate(sf::Clock&) const = 0;
+        virtual void Clear() const = 0;
+        virtual void Display() const = 0;
         virtual void Close() const = 0;
 
         void PushEventDispatcher(IO::EventDispatcher* dispatcher)

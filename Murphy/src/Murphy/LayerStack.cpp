@@ -17,11 +17,13 @@ namespace Murphy
     void LayerStack::PushLayer(Layer* layer)
     {
         m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+        layer->OnAttach();
     }
 
     void LayerStack::PushOverlay(Layer* overlay)
     {
         m_Layers.emplace_back(overlay);
+        overlay->OnAttach();
     }
     
     void LayerStack::PopLayer(Layer* layer)
@@ -30,6 +32,7 @@ namespace Murphy
         if (it != m_Layers.end())
         {
             m_Layers.erase(it);
+            (*it)->OnDetach();
             m_LayerInsert--;
         }
     }
@@ -38,6 +41,9 @@ namespace Murphy
     {
         auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
         if (it != m_Layers.end())
+        {
             m_Layers.erase(it);
+            (*it)->OnDetach();
+        }
     }
 }

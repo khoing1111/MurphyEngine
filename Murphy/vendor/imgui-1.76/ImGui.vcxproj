@@ -113,7 +113,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\imconfig-SFML.h" />
     <ClInclude Include="include\imconfig.h" />
     <ClInclude Include="include\imgui-SFML.h" />
     <ClInclude Include="include\imgui-SFML_export.h" />

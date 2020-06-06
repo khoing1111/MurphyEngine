@@ -24,4 +24,3 @@ namespace Murphy
         std::vector<Layer*>::iterator m_LayerInsert;
     };
 }
-

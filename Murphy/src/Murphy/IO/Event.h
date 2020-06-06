@@ -37,6 +37,7 @@ namespace Murphy::IO
     enum EventCategory
     {
         None = 0,
+
         WindowEventCategory         = MP_BIT(0),
         InputEventCategory          = MP_BIT(1),
         KeyboardEventCategory       = MP_BIT(2),
@@ -45,7 +46,9 @@ namespace Murphy::IO
         MouseWheelEvenCategoryt     = MP_BIT(5),
         JoystickEventCategory       = MP_BIT(6),
         TouchEventCategory          = MP_BIT(7),
-        SensorEventCategory         = MP_BIT(8)
+        SensorEventCategory         = MP_BIT(8),
+
+        Count
     };
 
     class MURPHY_API Event

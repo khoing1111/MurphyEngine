@@ -3,6 +3,7 @@
 #include "IO/WindowEvents.h"
 
 #include <SFML/System/Clock.hpp>
+#include "Murphy/Layers/ImGuiLayer.h"
 
 
 namespace Murphy
@@ -13,12 +14,15 @@ namespace Murphy
             Window::Create(WindowProps("MURPHY ENGINE", 1280, 720))
         );
 
+        // Setup Window Event Dispatchers
         auto anyEventDispatcher = new IO::AnyEventDispatcher(
             std::bind(&Application::OnEvent, this, std::placeholders::_1)
         );
 
         m_Window->PushEventDispatcher(anyEventDispatcher);
 
+        // Setup Layers And Overlays
+        m_LayerStack.PushOverlay(new ImGuiLayer(m_Window));
     }
 
     Application::~Application()
@@ -48,15 +52,22 @@ namespace Murphy
 
     void Application::Run()
     {
+        for (Layer* layer : m_LayerStack)
+            layer->OnPreRun();
+
         sf::Clock deltaClock;
         while (m_IsRunning && m_Window->IsOpend())
         {
             // This will poll events from window and propagate it to dispatcher
             m_Window->OnUpdate(deltaClock);
 
-            // Update Layers Logic
+            m_Window->Clear();
+
+            // Update Layers Logic and render
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();
+
+            m_Window->Display();
         }
     }
 

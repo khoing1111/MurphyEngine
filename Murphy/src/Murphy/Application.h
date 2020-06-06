@@ -26,7 +26,7 @@ namespace Murphy
 
     private:
         LayerStack m_LayerStack;
-        MP_UPTR<Window> m_Window;
+        MP_SPTR<Window> m_Window;
         bool m_IsRunning = true;
     };
 

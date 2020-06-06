@@ -40,13 +40,15 @@
     <ClInclude Include="src\Murphy\Log.h">
       <Filter>Murphy</Filter>
     </ClInclude>
-    <ClInclude Include="src\Murphy\Platform\WindowsWindow.h">
-      <Filter>Murphy\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="src\Murphy\Window.h">
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\mppch.h" />
+    <ClInclude Include="src\Murphy\Layers\ImGuiLayer.h" />
+    <ClInclude Include="src\Murphy\Platform\Windows\Window.h">
+      <Filter>Murphy\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Platform\ImGuiSFML.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Murphy\Application.cpp">
@@ -61,9 +63,14 @@
     <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
-    <ClCompile Include="src\Murphy\Platform\WindowsWindow.cpp">
+    <ClCompile Include="src\mppch.cpp" />
+    <ClCompile Include="src\Murphy\Layers\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Murphy\Platform\Windows\Window.cpp">
       <Filter>Murphy\Platform</Filter>
     </ClCompile>
-    <ClCompile Include="src\mppch.cpp" />
+    <ClCompile Include="src\Murphy\Platform\ImGuiSFML.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

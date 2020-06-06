@@ -10,55 +10,51 @@
 #include "Murphy/IO/MouseEvents.h"
 
 
-namespace Murphy
+namespace Murphy::Windows
 {
-    class WindowsWindow : public Window
+    class Window: public ::Murphy::Window
     {
     public:
-        WindowsWindow(const Murphy::WindowProps& props);
-        virtual ~WindowsWindow();
+        Window(const Murphy::WindowProps& props);
+        virtual ~Window();
 
         virtual unsigned int GetWidth() const override { return m_Window->getSize().x; }
         virtual unsigned int GetHeight() const override { return m_Window->getSize().y; }
         virtual bool IsOpend() const override { return m_Window->isOpen(); }
+        virtual bool HasFocus() const override { return m_Window->hasFocus(); }
         virtual void Close() const override
         { 
             m_Window->close();
-            ImGui::SFML::Shutdown();
         }
 
         virtual void OnUpdate(sf::Clock& clock) const override
         {
-            sf::CircleShape shape(100.f);
-            shape.setFillColor(sf::Color::Green);
-
             sf::Event event;
             while (m_Window->pollEvent(event))
             {
-                // Update ImGui Events
-                ImGui::SFML::ProcessEvent(event);
-
                 // Translate event to our event system
                 if (event.type == sf::Event::Closed)
                     PropagateEvent(IO::WindowClosedEvent());
                 else if (event.type == sf::Event::MouseMoved)
                     PropagateEvent(IO::MouseMovedEvent(event.mouseMove.x, event.mouseMove.y));
+                else if (event.type == sf::Event::MouseButtonPressed)
+                    PropagateEvent(IO::MousePressedEvent(
+                        event.mouseButton.x, event.mouseButton.y, SFToIOMouseButton(event.mouseButton.button)
+                    ));
+                else if (event.type == sf::Event::MouseButtonReleased)
+                    PropagateEvent(IO::MouseReleasedEvent(
+                        event.mouseButton.x, event.mouseButton.y, SFToIOMouseButton(event.mouseButton.button)
+                    ));
             }
-
-            ImGui::SFML::Update(*m_Window, clock.restart());
-
-            ImGui::Begin("Hello, world!");
-            ImGui::Button("Look at this pretty button");
-            ImGui::End();
-
-            m_Window->clear();
-            m_Window->draw(shape);
-            ImGui::SFML::Render(*m_Window);
-            m_Window->display();
         }
+
+        virtual void Clear() const override { m_Window->clear(); }
+        virtual void Display() const override { m_Window->display(); }
+
+    private:
+        IO::Mouse::Button SFToIOMouseButton(sf::Mouse::Button button) const;
 
     private:
         sf::RenderWindow* m_Window;
     };
 }
-

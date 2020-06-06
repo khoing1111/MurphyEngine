@@ -14,4 +14,5 @@ namespace Murphy::IO
     };
 
     MPMC_EVENT_DISPATCHER(WindowClosedEvent);
+
 }

@@ -11,4 +11,14 @@ namespace Murphy
     Layer::~Layer()
     {
     }
+
+    void Layer::PushEventDispatcher(IO::EventDispatcher* dispatcher)
+    {
+        m_EventDispatcherStack.PushEventDispatcher(dispatcher);
+    }
+
+    void Layer::PopEventDispatcher(IO::EventDispatcher* dispatcher)
+    {
+        m_EventDispatcherStack.PopEventDispatcher(dispatcher);
+    }
 }
