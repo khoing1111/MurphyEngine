@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "IO/Event.h"
+#include "Graphics/Renderer.h"
 
 namespace Murphy
 {
@@ -13,7 +14,8 @@ namespace Murphy
 
         virtual void OnAttach() {}
         virtual void OnDetach() {}
-        virtual void OnUpdate() {}
+        virtual void Update(float timeDelta) {}
+        virtual void Render(Renderer& renderer) {}
         virtual void OnPreRun() {}
         virtual void OnEvent(IO::Event& event) 
         {

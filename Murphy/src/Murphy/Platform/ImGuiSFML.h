@@ -27,9 +27,6 @@
 namespace Murphy::ImGuiSFML
 {
     void Init(MP_SPTR<Murphy::Window> window, bool loadDefaultFont = true);
-    void OnMouseMove(Murphy::IO::MouseMovedEvent& event);
-    void OnMousePressed(Murphy::IO::MousePressedEvent& event);
-    void OnMouseReleased(Murphy::IO::MouseReleasedEvent& event);
 
     void RenderDrawLists(ImDrawData* draw_data);
 

@@ -14,7 +14,6 @@ namespace Murphy::IO
         WindowGainedFocus,      ///< The window gained the focus (no data)
         KeyPressed,             ///< A key was pressed (data in event.key)
         KeyReleased,            ///< A key was released (data in event.key)
-        MouseWheelMoved,        ///< The mouse wheel was scrolled (data in event.mouseWheel) (deprecated)
         MouseWheelScrolled,     ///< The mouse wheel was scrolled (data in event.mouseWheelScroll)
         MouseButtonPressed,     ///< A mouse button was pressed (data in event.mouseButton)
         MouseButtonReleased,    ///< A mouse button was released (data in event.mouseButton)
@@ -43,7 +42,7 @@ namespace Murphy::IO
         KeyboardEventCategory       = MP_BIT(2),
         MouseEventCategory          = MP_BIT(3),
         MouseButtonEventCategory    = MP_BIT(4),
-        MouseWheelEvenCategoryt     = MP_BIT(5),
+        MouseWheelEvenCategory      = MP_BIT(5),
         JoystickEventCategory       = MP_BIT(6),
         TouchEventCategory          = MP_BIT(7),
         SensorEventCategory         = MP_BIT(8),

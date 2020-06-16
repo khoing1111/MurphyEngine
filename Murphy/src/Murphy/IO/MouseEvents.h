@@ -4,33 +4,9 @@
 
 namespace Murphy::IO
 {
-    class MURPHY_API MouseMovedEvent : public Event
-    {
-    public:
-        MouseMovedEvent(int x, int y)
-            : m_X(x), m_Y(y) {}
-
-        inline int GetX() const { return m_X; }
-        inline int GetY() const { return m_Y; }
-
-        std::string ToString() const override
-        {
-            std::stringstream ss;
-            ss << "MouseMoveEvent: " << m_X << ", " << m_Y;
-            return ss.str();
-        }
-
-        MPMC_EVENT_CLASS_TYPE(MouseMoved)
-        MPMC_EVENT_CLASS_CATEGORY(MouseEventCategory | InputEventCategory)
-    private:
-        int m_X, m_Y;
-    };
-
-    MPMC_EVENT_DISPATCHER(MouseMovedEvent);
-
     namespace Mouse
     {
-        enum Button
+        enum class Button
         {
             None = 0,
 
@@ -44,55 +20,83 @@ namespace Murphy::IO
         };
     }
 
-    class MURPHY_API MousePressedEvent : public Event
+    class MouseEvent : public Event
     {
     public:
-        MousePressedEvent(int x, int y, Mouse::Button button)
-            : m_X(x), m_Y(y), m_Button(button) {}
+        MouseEvent(int x, int y)
+            : m_X(x), m_Y(y) {}
 
         inline int GetX() const { return m_X; }
         inline int GetY() const { return m_Y; }
-        inline Mouse::Button GetButton() const { return m_Button; }
+    protected:
+        int m_X, m_Y;
+    };
 
-        std::string ToString() const override
-        {
-            std::stringstream ss;
-            ss << "MousePressedEvent: " << m_X << ", " << m_Y;
-            return ss.str();
-        }
+    class MouseButtonEvent : public MouseEvent
+    {
+    public:
+        MouseButtonEvent(int x, int y, Mouse::Button button)
+            : MouseEvent(x, y), m_Button(button) {}
+
+        inline Mouse::Button GetButton() const { return m_Button; }
+    protected:
+        Mouse::Button m_Button;
+    };
+
+    /************************************************************************************************/
+    //------------------------------------------------------------------------------------------------
+    class MURPHY_API MouseMovedEvent : public MouseEvent
+    {
+    public:
+        MouseMovedEvent(int x, int y)
+            : MouseEvent(x, y) {}
+
+        MPMC_EVENT_CLASS_TYPE(MouseMoved)
+        MPMC_EVENT_CLASS_CATEGORY(MouseEventCategory | InputEventCategory)
+    };
+
+    MPMC_EVENT_DISPATCHER(MouseMovedEvent);
+
+    //------------------------------------------------------------------------------------------------
+    class MURPHY_API MousePressedEvent : public MouseButtonEvent
+    {
+    public:
+        MousePressedEvent(int x, int y, Mouse::Button button)
+            : MouseButtonEvent(x, y, button) {}
 
         MPMC_EVENT_CLASS_TYPE(MouseButtonPressed)
         MPMC_EVENT_CLASS_CATEGORY(MouseButtonEventCategory | MouseEventCategory | InputEventCategory)
-    private:
-        int m_X, m_Y;
-        Mouse::Button m_Button;
     };
 
     MPMC_EVENT_DISPATCHER(MousePressedEvent);
 
-    class MURPHY_API MouseReleasedEvent : public Event
+    //------------------------------------------------------------------------------------------------
+    class MURPHY_API MouseReleasedEvent : public MouseButtonEvent
     {
     public:
         MouseReleasedEvent(int x, int y, Mouse::Button button)
-            : m_X(x), m_Y(y), m_Button(button) {}
-
-        inline int GetX() const { return m_X; }
-        inline int GetY() const { return m_Y; }
-        inline Mouse::Button GetButton() const { return m_Button; }
-
-        std::string ToString() const override
-        {
-            std::stringstream ss;
-            ss << "MouseReleasedEvent: " << m_X << ", " << m_Y;
-            return ss.str();
-        }
+            : MouseButtonEvent(x, y, button) {}
 
         MPMC_EVENT_CLASS_TYPE(MouseButtonReleased)
         MPMC_EVENT_CLASS_CATEGORY(MouseButtonEventCategory | MouseEventCategory | InputEventCategory)
-    private:
-        int m_X, m_Y;
-        Mouse::Button m_Button;
     };
 
     MPMC_EVENT_DISPATCHER(MouseReleasedEvent);
+
+    //------------------------------------------------------------------------------------------------
+    class MURPHY_API MouseWheelScrolledEvent : public MouseEvent
+    {
+    public:
+        MouseWheelScrolledEvent(int x, int y, float delta)
+            : MouseEvent(x, y), m_Delta(delta) {}
+
+        inline float GetDelta() const { return m_Delta; }
+
+        MPMC_EVENT_CLASS_TYPE(MouseWheelScrolled)
+        MPMC_EVENT_CLASS_CATEGORY(MouseWheelEvenCategory | MouseEventCategory | InputEventCategory)
+    private:
+        float m_Delta;
+    };
+
+    MPMC_EVENT_DISPATCHER(MouseWheelScrolledEvent);
 }

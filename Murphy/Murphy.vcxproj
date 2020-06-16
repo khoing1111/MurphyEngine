@@ -143,6 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Murphy\2D\Geometry.h" />
+    <ClInclude Include="src\Murphy\2D\Shape.h" />
+    <ClInclude Include="src\Murphy\Graphics\Geometry.h" />
+    <ClInclude Include="src\Murphy\Input.h" />
     <ClInclude Include="src\Murphy\Layers\ImGuiLayer.h" />
     <ClInclude Include="src\Murphy.h" />
     <ClInclude Include="src\Murphy\Application.h" />
@@ -156,16 +160,22 @@
     <ClInclude Include="src\Murphy\Log.h" />
     <ClInclude Include="src\Murphy\Platform\ImGuiSFML.h" />
     <ClInclude Include="src\Murphy\Platform\Windows\Window.h" />
+    <ClInclude Include="src\Murphy\Graphics\Renderer.h" />
     <ClInclude Include="src\Murphy\Window.h" />
     <ClInclude Include="src\mppch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Murphy\2D\Geometry.cpp" />
+    <ClCompile Include="src\Murphy\2D\Shape.cpp" />
+    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp" />
+    <ClCompile Include="src\Murphy\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Murphy\Layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\Murphy\Application.cpp" />
     <ClCompile Include="src\Murphy\Layer.cpp" />
     <ClCompile Include="src\Murphy\LayerStack.cpp" />
     <ClCompile Include="src\Murphy\Log.cpp" />
     <ClCompile Include="src\Murphy\Platform\ImGuiSFML.cpp" />
+    <ClCompile Include="src\Murphy\Platform\Windows\Input.cpp" />
     <ClCompile Include="src\Murphy\Platform\Windows\Window.cpp" />
     <ClCompile Include="src\mppch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

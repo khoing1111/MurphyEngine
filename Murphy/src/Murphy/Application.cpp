@@ -4,6 +4,7 @@
 
 #include <SFML/System/Clock.hpp>
 #include "Murphy/Layers/ImGuiLayer.h"
+#include "Murphy/2D/Shape.h"
 
 
 namespace Murphy
@@ -24,6 +25,7 @@ namespace Murphy
         // Setup Layers And Overlays
         m_LayerStack.PushOverlay(new ImGuiLayer(m_Window));
     }
+
 
     Application::~Application()
     {
@@ -58,16 +60,34 @@ namespace Murphy
         sf::Clock deltaClock;
         while (m_IsRunning && m_Window->IsOpend())
         {
-            // This will poll events from window and propagate it to dispatcher
-            m_Window->OnUpdate(deltaClock);
+            float timeDelta = deltaClock.restart().asSeconds();
 
-            m_Window->Clear();
+            // This will poll events from window and propagate it to dispatcher
+            m_Window->Update(timeDelta);
 
             // Update Layers Logic and render
             for (Layer* layer : m_LayerStack)
-                layer->OnUpdate();
+            {
+                float frameDelta = timeDelta;
 
-            m_Window->Display();
+                // If time delta is too large, then perform multiple update to catch up.
+                // This is currently to lock each update to at least 30fps.
+                do {
+                    layer->Update(min(0.034, frameDelta));
+                    frameDelta -= 0.034;
+                } while (frameDelta > 0);
+            }
+
+            m_Renderer.Begin(m_Window);
+
+            for (Layer* layer : m_LayerStack)
+                layer->Render(m_Renderer);
+
+            Murphy::M2D::Rect rect;
+            rect.SetSize(100, 100);
+            rect.Draw(m_Renderer);
+
+            m_Renderer.End();
         }
     }
 

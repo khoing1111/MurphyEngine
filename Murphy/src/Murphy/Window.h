@@ -31,7 +31,7 @@ namespace Murphy
         virtual bool HasFocus() const = 0;
 
         // Action
-        virtual void OnUpdate(sf::Clock&) const = 0;
+        virtual void Update(float timeDelta) const = 0;
         virtual void Clear() const = 0;
         virtual void Display() const = 0;
         virtual void Close() const = 0;
@@ -52,6 +52,7 @@ namespace Murphy
         }
 
         static Window* Create(const WindowProps& props);
+        virtual void* GetPlatformWindow() const = 0;
     private:
         IO::EventDispatcherStack m_DispatcherStack;
     };

@@ -49,6 +49,11 @@
       <Filter>Murphy\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\Platform\ImGuiSFML.h" />
+    <ClInclude Include="src\Murphy\Input.h" />
+    <ClInclude Include="src\Murphy\2D\Shape.h" />
+    <ClInclude Include="src\Murphy\2D\Geometry.h" />
+    <ClInclude Include="src\Murphy\Graphics\Geometry.h" />
+    <ClInclude Include="src\Murphy\Graphics\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Murphy\Application.cpp">
@@ -69,6 +74,11 @@
       <Filter>Murphy\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Platform\ImGuiSFML.cpp" />
+    <ClCompile Include="src\Murphy\Platform\Windows\Input.cpp" />
+    <ClCompile Include="src\Murphy\2D\Geometry.cpp" />
+    <ClCompile Include="src\Murphy\2D\Shape.cpp" />
+    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp" />
+    <ClCompile Include="src\Murphy\Graphics\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

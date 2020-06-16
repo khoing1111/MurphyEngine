@@ -159,58 +159,6 @@ namespace Murphy::ImGuiSFML
         ImGui::DestroyContext();
     }
 
-    void OnMouseMove(Murphy::IO::MouseMovedEvent& event)
-    {
-        ImGuiIO& io = ImGui::GetIO();
-        io.MousePos = { (float)event.GetX(), (float)event.GetY() };
-    }
-
-    void OnMousePressed(Murphy::IO::MousePressedEvent& event)
-    {
-        ImGuiIO& io = ImGui::GetIO();
-        io.MousePos = { (float)event.GetX(), (float)event.GetY() };
-        switch (event.GetButton())
-        {
-        case IO::Mouse::Left:
-            io.MouseDown[0] = true;
-            break;
-        case IO::Mouse::Right:
-            io.MouseDown[1] = true;
-            break;
-        case IO::Mouse::Middle:
-        case IO::Mouse::XButton1:
-        case IO::Mouse::XButton2:
-            io.MouseDown[2] = true;
-            break;
-        }
-
-        // Update Ctrl, Shift, Alt, Super state
-        io.KeyCtrl = io.KeysDown[sf::Keyboard::LControl] || io.KeysDown[sf::Keyboard::RControl];
-        io.KeyAlt = io.KeysDown[sf::Keyboard::LAlt] || io.KeysDown[sf::Keyboard::RAlt];
-        io.KeyShift = io.KeysDown[sf::Keyboard::LShift] || io.KeysDown[sf::Keyboard::RShift];
-        io.KeySuper = io.KeysDown[sf::Keyboard::LSystem] || io.KeysDown[sf::Keyboard::RSystem];
-    }
-
-    void OnMouseReleased(Murphy::IO::MouseReleasedEvent& event)
-    {
-        ImGuiIO& io = ImGui::GetIO();
-        io.MousePos = { (float)event.GetX(), (float)event.GetY() };
-        switch (event.GetButton())
-        {
-        case IO::Mouse::Left:
-            io.MouseReleased[0] = false;
-            break;
-        case IO::Mouse::Right:
-            io.MouseReleased[1] = false;
-            break;
-        case IO::Mouse::Middle:
-        case IO::Mouse::XButton1:
-        case IO::Mouse::XButton2:
-            io.MouseReleased[2] = false;
-            break;
-        }
-    }
-
     GLuint ConvertImTextureIDToGLTextureHandle(ImTextureID textureID) {
         GLuint glTextureHandle;
         std::memcpy(&glTextureHandle, &textureID, sizeof(GLuint));

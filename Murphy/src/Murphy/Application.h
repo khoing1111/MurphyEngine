@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "IO/Event.h"
 #include "IO/WindowEvents.h"
+#include "Graphics/Renderer.h"
 
 namespace Murphy 
 {
@@ -27,6 +28,7 @@ namespace Murphy
     private:
         LayerStack m_LayerStack;
         MP_SPTR<Window> m_Window;
+        Renderer m_Renderer;
         bool m_IsRunning = true;
     };
 

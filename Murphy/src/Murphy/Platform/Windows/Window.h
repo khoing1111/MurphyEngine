@@ -27,7 +27,7 @@ namespace Murphy::Windows
             m_Window->close();
         }
 
-        virtual void OnUpdate(sf::Clock& clock) const override
+        virtual void Update(float timeDelta) const override
         {
             sf::Event event;
             while (m_Window->pollEvent(event))
@@ -45,11 +45,16 @@ namespace Murphy::Windows
                     PropagateEvent(IO::MouseReleasedEvent(
                         event.mouseButton.x, event.mouseButton.y, SFToIOMouseButton(event.mouseButton.button)
                     ));
+                else if (event.type == sf::Event::MouseWheelScrolled)
+                    PropagateEvent(IO::MouseWheelScrolledEvent(
+                        event.mouseWheelScroll.x, event.mouseWheelScroll.y, event.mouseWheelScroll.delta
+                    ));
             }
         }
 
         virtual void Clear() const override { m_Window->clear(); }
         virtual void Display() const override { m_Window->display(); }
+        virtual void* GetPlatformWindow() const override { return m_Window; };
 
     private:
         IO::Mouse::Button SFToIOMouseButton(sf::Mouse::Button button) const;
