@@ -9,27 +9,25 @@
 
 namespace Murphy
 {
-    Application::Application()
+    Application::Application(Window& window)
+        : m_Window(window)
     {
-        m_Window = MP_UPTR<Window>(
-            Window::Create(WindowProps("MURPHY ENGINE", 1280, 720))
-        );
+        m_Window = window;
 
         // Setup Window Event Dispatchers
         auto anyEventDispatcher = new IO::AnyEventDispatcher(
             std::bind(&Application::OnEvent, this, std::placeholders::_1)
         );
 
-        m_Window->PushEventDispatcher(anyEventDispatcher);
+        m_Window.PushEventDispatcher(anyEventDispatcher);
 
         // Setup Layers And Overlays
-        m_LayerStack.PushOverlay(new ImGuiLayer(m_Window));
+        //m_LayerStack.PushOverlay(new ImGuiLayer(m_Window));
     }
 
 
     Application::~Application()
     {
-        m_Window->Close();
     }
 
     bool Application::OnEvent(IO::Event& event)
@@ -58,12 +56,12 @@ namespace Murphy
             layer->OnPreRun();
 
         sf::Clock deltaClock;
-        while (m_IsRunning && m_Window->IsOpend())
+        while (m_IsRunning && m_Window.IsOpen())
         {
             float timeDelta = deltaClock.restart().asSeconds();
 
             // This will poll events from window and propagate it to dispatcher
-            m_Window->Update(timeDelta);
+            m_Window.Update(timeDelta);
 
             // Update Layers Logic and render
             for (Layer* layer : m_LayerStack)
@@ -78,16 +76,12 @@ namespace Murphy
                 } while (frameDelta > 0);
             }
 
-            m_Renderer.Begin(m_Window);
+            //m_Renderer.Begin(m_Window);
 
-            for (Layer* layer : m_LayerStack)
-                layer->Render(m_Renderer);
+            //for (Layer* layer : m_LayerStack)
+            //    layer->Render(m_Renderer);
 
-            Murphy::M2D::Rect rect;
-            rect.SetSize(100, 100);
-            rect.Draw(m_Renderer);
-
-            m_Renderer.End();
+            //m_Renderer.End();
         }
     }
 

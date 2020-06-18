@@ -1,19 +1,7 @@
 #include <Murphy.h>
 
-class App : public Murphy::Application
+
+MP_UPTR<Murphy::Application> Murphy::CreateApplication(Murphy::Window& window)
 {
-public:
-    App()
-    {
-    }
-
-    ~App()
-    {
-    }
-};
-
-
-Murphy::Application* Murphy::CreateApplication()
-{
-    return new App;
+    return std::make_unique<Murphy::Application>(window);
 }

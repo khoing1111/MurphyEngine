@@ -12,12 +12,6 @@
     <ClInclude Include="include\imconfig.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\imgui-SFML.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\imgui-SFML_export.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\imgui.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -35,9 +29,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\imgui-SFML.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\imgui.cpp">
       <Filter>src</Filter>
     </ClCompile>

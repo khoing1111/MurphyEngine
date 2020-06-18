@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Murphy/Core.h"
+#include "Core.h"
 #include "Renderer.h"
 
 namespace Murphy
@@ -9,13 +10,10 @@ namespace Murphy
     {
         float X, Y;
 
-        Vector2F()
-            : X(0.0f), Y(0.0f) {}
+        Vector2F();
+        Vector2F(float x, float y);
 
-        Vector2F(float x, float y)
-            : X(x), Y(y) {}
-
-        void operator=(const Vector2F& source);
+        Vector2F& operator=(const Vector2F& source);
     };
 
     class MURPHY_API Drawable

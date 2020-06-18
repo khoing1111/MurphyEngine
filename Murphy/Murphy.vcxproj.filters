@@ -4,15 +4,39 @@
     <Filter Include="Murphy">
       <UniqueIdentifier>{AADD01C4-967F-2C9A-7F3A-40EE6B7BB3EA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Murphy\2D">
+      <UniqueIdentifier>{0FC4EE49-7B2E-A3C0-C46C-546630168115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Murphy\Graphics">
+      <UniqueIdentifier>{2AA562BE-9630-D082-9F41-53770B4C2C83}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Murphy\IO">
       <UniqueIdentifier>{11C7EE49-7D31-A3C0-C66F-546632198115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Murphy\Layers">
+      <UniqueIdentifier>{2931B7AB-95F1-32E2-5E2C-7C5FCAAB77BE}</UniqueIdentifier>
     </Filter>
     <Filter Include="Murphy\Platform">
       <UniqueIdentifier>{3E191D3F-AAA4-8A03-B3B5-0DF81FC0E603}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Murphy\Platform\Windows">
+      <UniqueIdentifier>{782157EF-E458-9F86-ED62-03AA5919C67F}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Murphy.h" />
+    <ClInclude Include="src\Murphy\2D\Core.h">
+      <Filter>Murphy\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\2D\Geometry.h">
+      <Filter>Murphy\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\2D\Shape.h">
+      <Filter>Murphy\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\2D\Vertices.h">
+      <Filter>Murphy\2D</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Application.h">
       <Filter>Murphy</Filter>
     </ClInclude>
@@ -21,6 +45,15 @@
     </ClInclude>
     <ClInclude Include="src\Murphy\EntryPoint.h">
       <Filter>Murphy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Graphics\Core.h">
+      <Filter>Murphy\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Graphics\Geometry.h">
+      <Filter>Murphy\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Graphics\Renderer.h">
+      <Filter>Murphy\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\IO\Event.h">
       <Filter>Murphy\IO</Filter>
@@ -31,33 +64,50 @@
     <ClInclude Include="src\Murphy\IO\WindowEvents.h">
       <Filter>Murphy\IO</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\Input.h">
+      <Filter>Murphy</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Layer.h">
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\LayerStack.h">
       <Filter>Murphy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\Layers\ImGuiLayer.h">
+      <Filter>Murphy\Layers</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Log.h">
       <Filter>Murphy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Murphy\Platform\Windows\Window.h">
+      <Filter>Murphy\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\Window.h">
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\mppch.h" />
-    <ClInclude Include="src\Murphy\Layers\ImGuiLayer.h" />
-    <ClInclude Include="src\Murphy\Platform\Windows\Window.h">
-      <Filter>Murphy\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Murphy\Platform\ImGuiSFML.h" />
-    <ClInclude Include="src\Murphy\Input.h" />
-    <ClInclude Include="src\Murphy\2D\Shape.h" />
-    <ClInclude Include="src\Murphy\2D\Geometry.h" />
-    <ClInclude Include="src\Murphy\Graphics\Geometry.h" />
-    <ClInclude Include="src\Murphy\Graphics\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Murphy\2D\Geometry.cpp">
+      <Filter>Murphy\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\2D\Shape.cpp">
+      <Filter>Murphy\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\2D\Vertices.cpp">
+      <Filter>Murphy\2D</Filter>
+    </ClCompile>
     <ClCompile Include="src\Murphy\Application.cpp">
       <Filter>Murphy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Graphics\Core.cpp">
+      <Filter>Murphy\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp">
+      <Filter>Murphy\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Graphics\Renderer.cpp">
+      <Filter>Murphy\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Layer.cpp">
       <Filter>Murphy</Filter>
@@ -65,22 +115,15 @@
     <ClCompile Include="src\Murphy\LayerStack.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Murphy\Layers\ImGuiLayer.cpp">
+      <Filter>Murphy\Layers</Filter>
+    </ClCompile>
     <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
-    <ClCompile Include="src\mppch.cpp" />
-    <ClCompile Include="src\Murphy\Layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\Murphy\Platform\Windows\Window.cpp">
-      <Filter>Murphy\Platform</Filter>
+      <Filter>Murphy\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Murphy\Platform\ImGuiSFML.cpp" />
-    <ClCompile Include="src\Murphy\Platform\Windows\Input.cpp" />
-    <ClCompile Include="src\Murphy\2D\Geometry.cpp" />
-    <ClCompile Include="src\Murphy\2D\Shape.cpp" />
-    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp" />
-    <ClCompile Include="src\Murphy\Graphics\Renderer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
+    <ClCompile Include="src\mppch.cpp" />
   </ItemGroup>
 </Project>

@@ -16,6 +16,12 @@
 
 #define MP_BIT(x) (1 << x)
 
+namespace Murphy
+{
+    typedef unsigned char UInt8;
+    typedef unsigned int UInt32;
+}
+
 #include <string>
 #include <functional>
 #include <vector>

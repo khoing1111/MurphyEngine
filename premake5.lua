@@ -53,11 +53,12 @@ project "Murphy"
         cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
-
+        platforms {"Win32", "x64"}
         defines
         {
             "MP_PLATFORM_WINDOWS",
-            "MP_BUILD_DLL"
+            "MP_BUILD_DLL",
+            "WIN32"
         }
 
     filter "configurations:Debug"
@@ -78,7 +79,7 @@ project "Murphy"
 
 project "Sandbox"
     location "Sandbox"
-    kind "ConsoleApp"
+    kind "WindowedApp"
     language "C++"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -113,7 +114,12 @@ project "Sandbox"
         cppdialect "C++17"
         staticruntime "On"
         systemversion "latest"
-        defines "MP_PLATFORM_WINDOWS"
+        platforms {"Win32", "x64"}
+        defines 
+        {
+            "MP_PLATFORM_WINDOWS",
+            "WIN32"
+        }
 
         postbuildcommands
         {

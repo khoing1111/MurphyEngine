@@ -114,8 +114,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\imconfig.h" />
-    <ClInclude Include="include\imgui-SFML.h" />
-    <ClInclude Include="include\imgui-SFML_export.h" />
     <ClInclude Include="include\imgui.h" />
     <ClInclude Include="include\imgui_internal.h" />
     <ClInclude Include="include\imstb_rectpack.h" />
@@ -123,7 +121,6 @@
     <ClInclude Include="include\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\imgui-SFML.cpp" />
     <ClCompile Include="src\imgui.cpp" />
     <ClCompile Include="src\imgui_demo.cpp" />
     <ClCompile Include="src\imgui_draw.cpp" />

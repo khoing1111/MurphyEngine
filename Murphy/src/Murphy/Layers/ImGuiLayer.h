@@ -2,10 +2,9 @@
 
 #include "Murphy/Layer.h"
 #include "Murphy/Window.h"
-#include "Murphy/Platform/ImGuiSFML.h"
 
 #include "Murphy/IO/MouseEvents.h"
-    
+    /*
 namespace Murphy
 {
     class ImGuiLayer : public Layer
@@ -33,4 +32,4 @@ namespace Murphy
         MP_WPTR<Window> m_Window;
     };
 }
-
+*/

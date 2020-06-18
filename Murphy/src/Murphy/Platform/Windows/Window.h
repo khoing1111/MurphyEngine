@@ -1,13 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-#include "imgui.h"
-#include "imgui-SFML.h"
+#include <windowsx.h>
 
 #include "Murphy/Window.h"
 #include "Murphy/IO/WindowEvents.h"
 #include "Murphy/IO/MouseEvents.h"
+
 
 
 namespace Murphy::Windows
@@ -15,51 +13,41 @@ namespace Murphy::Windows
     class Window: public ::Murphy::Window
     {
     public:
-        Window(const Murphy::WindowProps& props);
+        Window(const HWND m_WindowRef);
         virtual ~Window();
 
-        virtual unsigned int GetWidth() const override { return m_Window->getSize().x; }
-        virtual unsigned int GetHeight() const override { return m_Window->getSize().y; }
-        virtual bool IsOpend() const override { return m_Window->isOpen(); }
-        virtual bool HasFocus() const override { return m_Window->hasFocus(); }
-        virtual void Close() const override
+        virtual unsigned int GetWidth() const override 
         { 
-            m_Window->close();
+            RECT rect;
+            GetWindowRect(m_WindowRef, &rect);
+            return rect.right - rect.left;
         }
 
-        virtual void Update(float timeDelta) const override
+        virtual unsigned int GetHeight() const override
         {
-            sf::Event event;
-            while (m_Window->pollEvent(event))
-            {
-                // Translate event to our event system
-                if (event.type == sf::Event::Closed)
-                    PropagateEvent(IO::WindowClosedEvent());
-                else if (event.type == sf::Event::MouseMoved)
-                    PropagateEvent(IO::MouseMovedEvent(event.mouseMove.x, event.mouseMove.y));
-                else if (event.type == sf::Event::MouseButtonPressed)
-                    PropagateEvent(IO::MousePressedEvent(
-                        event.mouseButton.x, event.mouseButton.y, SFToIOMouseButton(event.mouseButton.button)
-                    ));
-                else if (event.type == sf::Event::MouseButtonReleased)
-                    PropagateEvent(IO::MouseReleasedEvent(
-                        event.mouseButton.x, event.mouseButton.y, SFToIOMouseButton(event.mouseButton.button)
-                    ));
-                else if (event.type == sf::Event::MouseWheelScrolled)
-                    PropagateEvent(IO::MouseWheelScrolledEvent(
-                        event.mouseWheelScroll.x, event.mouseWheelScroll.y, event.mouseWheelScroll.delta
-                    ));
-            }
+            RECT rect;
+            GetWindowRect(m_WindowRef, &rect);
+            return rect.bottom - rect.top;
+
         }
 
-        virtual void Clear() const override { m_Window->clear(); }
-        virtual void Display() const override { m_Window->display(); }
-        virtual void* GetPlatformWindow() const override { return m_Window; };
+        virtual bool IsOpen() const override { return IsWindow(m_WindowRef); }
+        virtual bool HasFocus() const override { return GetFocus() == m_WindowRef; }
+        virtual void Close() const override { if (IsWindow(m_WindowRef)) DestroyWindow(m_WindowRef); }
+
+        virtual void Update(float timeDelta) const override { PollInputs(); }
+
+        virtual void Clear() const override { /* TODO:*/ }
+        virtual void Display() const override { /* TODO:*/ }
+
+        static MP_UPTR<Window> Create(HINSTANCE hInstance, const std::wstring windowClassName, int nCmdShow, const WindowProps& props);
+        static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
     private:
-        IO::Mouse::Button SFToIOMouseButton(sf::Mouse::Button button) const;
+        void PollInputs() const;
 
     private:
-        sf::RenderWindow* m_Window;
+        HWND m_WindowRef;
     };
+
 }
