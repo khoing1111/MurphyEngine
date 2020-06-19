@@ -74,7 +74,7 @@ namespace Murphy
                 } while (frameDelta > 0);
             }
 
-            //m_Renderer.Begin(m_Window);
+            m_Renderer.ClearFrame(Murphy::Color::White);
 
             //for (Layer* layer : m_LayerStack)
             //    layer->Render(m_Renderer);

@@ -1,15 +1,14 @@
 #pragma once
 
 #include <d3d11.h>
+#include <wrl.h>
 
 #include "Murphy/Core.h"
 #include "Murphy/Graphics/Renderer.h"
 #include "Murphy/Platform/Windows/Window.h"
 
-extern "C" {
-    _declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
-}
 
+#define MP_COMPTR Microsoft::WRL::ComPtr
 
 namespace Murphy::DirectX
 {
@@ -21,7 +20,7 @@ namespace Murphy::DirectX
 
         Renderer(const Renderer&) = delete;
         Renderer& operator=(const Renderer&) = delete;
-        ~Renderer();
+        ~Renderer() = default;
 
         virtual bool Init() override
         {
@@ -53,6 +52,7 @@ namespace Murphy::DirectX
             sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
             sd.Flags = 0;
 
+            // Request to create D3D Devices, Context and Swap Chain
             const D3D_FEATURE_LEVEL featureLevelsRequested[] = 
             {
                 D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0,
@@ -86,7 +86,7 @@ namespace Murphy::DirectX
             if (hr == E_INVALIDARG)
             {
                 // Request device again, this time without D3D_FEATURE_LEVEL_11_1
-                hr = D3D11CreateDeviceAndSwapChain(
+                if (FAILED(D3D11CreateDeviceAndSwapChain(
                     nullptr,
                     D3D_DRIVER_TYPE_HARDWARE,
                     nullptr,
@@ -99,13 +99,25 @@ namespace Murphy::DirectX
                     &m_Device,
                     &featureLevelsSupported,
                     &m_DeviceContext
-                );
-
-                if (FAILED(hr))
+                )))
                     return false;
             }
 
+            // Create backbuffer render target
+            MP_COMPTR<ID3D11Resource> backBuffer;
+            m_SwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &backBuffer);
+            m_Device->CreateRenderTargetView(
+                backBuffer.Get(),
+                nullptr,
+                &m_RenderTarget
+            );
+
             return true;
+        }
+
+        virtual void ClearFrame(const Murphy::RGBAColor& color) override
+        {
+            m_DeviceContext->ClearRenderTargetView(m_RenderTarget.Get(), color.ToFloatArray().data());
         }
 
         virtual void EndFrame() override
@@ -114,9 +126,10 @@ namespace Murphy::DirectX
         }
 
     private:
-        ID3D11Device* m_Device = nullptr;
-        IDXGISwapChain* m_SwapChain = nullptr;
-        ID3D11DeviceContext* m_DeviceContext = nullptr;
+        MP_COMPTR<ID3D11Device> m_Device;
+        MP_COMPTR<IDXGISwapChain> m_SwapChain;
+        MP_COMPTR<ID3D11DeviceContext> m_DeviceContext;
+        MP_COMPTR<ID3D11RenderTargetView> m_RenderTarget;
     };
 }
 

@@ -14,6 +14,7 @@ namespace Murphy
 
         RGBAColor& operator=(const RGBAColor& source);
         UInt32 ToInt() const;
+        std::array<float, 4> ToFloatArray() const;
     };
 
     struct MURPHY_API RGBColor : public RGBAColor

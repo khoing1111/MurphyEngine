@@ -22,6 +22,11 @@ namespace Murphy
         return (UInt32)R << 24 | (UInt32)G << 16 | (UInt32)B << 8 | (UInt32)A;
     }
 
+    std::array<float, 4> RGBAColor::ToFloatArray() const
+    {
+        return { (float)R / 255, (float)G / 255, (float)B / 255, (float)A / 255, };
+    }
+
     RGBAColor& RGBAColor::operator=(const RGBAColor& source)
     {
         R = source.R;
