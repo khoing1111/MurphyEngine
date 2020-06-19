@@ -31,11 +31,13 @@ namespace Murphy::Windows
 
         }
 
+        HWND GetWindowRef() const;
+
         virtual bool IsOpen() const override { return IsWindow(m_WindowRef); }
         virtual bool HasFocus() const override { return GetFocus() == m_WindowRef; }
         virtual void Close() const override { if (IsWindow(m_WindowRef)) DestroyWindow(m_WindowRef); }
-
         virtual void Update(float timeDelta) const override { PollInputs(); }
+
 
         virtual void Clear() const override { /* TODO:*/ }
         virtual void Display() const override { /* TODO:*/ }

@@ -9,11 +9,9 @@
 
 namespace Murphy
 {
-    Application::Application(Window& window)
-        : m_Window(window)
+    Application::Application(Window& window, Renderer& renderer)
+        : m_Window(window), m_Renderer(renderer)
     {
-        m_Window = window;
-
         // Setup Window Event Dispatchers
         auto anyEventDispatcher = new IO::AnyEventDispatcher(
             std::bind(&Application::OnEvent, this, std::placeholders::_1)
@@ -81,7 +79,7 @@ namespace Murphy
             //for (Layer* layer : m_LayerStack)
             //    layer->Render(m_Renderer);
 
-            //m_Renderer.End();
+            m_Renderer.EndFrame();
         }
     }
 

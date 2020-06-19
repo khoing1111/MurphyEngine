@@ -59,6 +59,11 @@ namespace Murphy::Windows
     {
     }
 
+    HWND Window::GetWindowRef() const
+    {
+        return m_WindowRef;
+    }
+
     void Window::PollInputs() const
     {
         MSG msg = { };

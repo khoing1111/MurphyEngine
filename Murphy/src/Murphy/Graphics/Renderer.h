@@ -8,21 +8,14 @@ namespace Murphy
     class MURPHY_API Renderer
     {
     public:
-        Renderer()
-            : m_Window(nullptr) {}
-
+        Renderer(Window& window);
         virtual ~Renderer() {}
 
-        void Begin(MP_SPTR<Window> window);
-        void End();
+        virtual bool Init() = 0;
 
-        MP_SPTR<Window> GetWindow();
+        virtual void EndFrame() = 0;
 
-    private:
-        void BindWindow(MP_SPTR<Window> window);
-        MP_SPTR<Window> ReleaseWindow();
-
-    private:
-        MP_SPTR<Window> m_Window;
+    protected:
+        Window& m_Window;
     };
 }

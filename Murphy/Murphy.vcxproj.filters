@@ -19,6 +19,12 @@
     <Filter Include="Murphy\Platform">
       <UniqueIdentifier>{3E191D3F-AAA4-8A03-B3B5-0DF81FC0E603}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Murphy\Platform\Graphics">
+      <UniqueIdentifier>{3E276CAD-2A4C-BB2D-5397-A0BD3F1BBA4B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Murphy\Platform\Graphics\DirectX">
+      <UniqueIdentifier>{00688A54-ECB8-7596-151D-645801CD0800}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Murphy\Platform\Windows">
       <UniqueIdentifier>{782157EF-E458-9F86-ED62-03AA5919C67F}</UniqueIdentifier>
     </Filter>
@@ -79,6 +85,9 @@
     <ClInclude Include="src\Murphy\Log.h">
       <Filter>Murphy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Renderer.h">
+      <Filter>Murphy\Platform\Graphics\DirectX</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Platform\Windows\Window.h">
       <Filter>Murphy\Platform\Windows</Filter>
     </ClInclude>
@@ -120,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Murphy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Renderer.cpp">
+      <Filter>Murphy\Platform\Graphics\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Platform\Windows\Window.cpp">
       <Filter>Murphy\Platform\Windows</Filter>

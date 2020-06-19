@@ -61,6 +61,11 @@ project "Murphy"
             "WIN32"
         }
 
+        links
+        {
+            "d3d11.lib"
+        }
+
     filter "configurations:Debug"
         symbols "On"
         defines {"MP_DEBUG", "MP_ENABLE_ASSERTS"}

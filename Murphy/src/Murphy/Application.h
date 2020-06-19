@@ -13,7 +13,7 @@ namespace Murphy
     class MURPHY_API Application
     {
     public:
-        Application(Window& window);
+        Application(Window& window, Renderer& renderer);
         virtual ~Application();
         
         void Run();
@@ -28,11 +28,11 @@ namespace Murphy
     private:
         LayerStack m_LayerStack;
         Window& m_Window;
-        //Renderer m_Renderer;
+        Renderer& m_Renderer;
         bool m_IsRunning = true;
     };
 
     // To be define in CLIENT
-    MP_UPTR<Application> CreateApplication(Window&);
+    MP_UPTR<Application> CreateApplication(Window&, Renderer&);
 }
 
