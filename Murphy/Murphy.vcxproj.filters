@@ -25,6 +25,9 @@
     <Filter Include="Murphy\Platform\Graphics\DirectX">
       <UniqueIdentifier>{00688A54-ECB8-7596-151D-645801CD0800}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Murphy\Platform\Graphics\DirectX\Shaders">
+      <UniqueIdentifier>{D98C561B-C509-4A5E-EE86-4A72DA62E6F1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Murphy\Platform\Windows">
       <UniqueIdentifier>{782157EF-E458-9F86-ED62-03AA5919C67F}</UniqueIdentifier>
     </Filter>
@@ -137,5 +140,13 @@
       <Filter>Murphy\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\mppch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="src\Murphy\Platform\Graphics\DirectX\Shaders\PixelShader-ps.hlsl">
+      <Filter>Murphy\Platform\Graphics\DirectX\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="src\Murphy\Platform\Graphics\DirectX\Shaders\VertexShader-vs.hlsl">
+      <Filter>Murphy\Platform\Graphics\DirectX\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

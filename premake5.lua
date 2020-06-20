@@ -27,7 +27,8 @@ project "Murphy"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/src/**.hlsl"
     }
 
     includedirs
@@ -81,6 +82,15 @@ project "Murphy"
         defines "MP_DIST"
         links {"sfml-graphics", "sfml-window", "sfml-system"}
 
+    filter { "files:**-ps.hlsl" }
+        shadertype "Pixel"
+        shaderentry "ForPixel"
+
+    filter { "files:**-vs.hlsl" }
+        removeflags "ExcludeFromBuild"
+        shadertype "Vertex"
+        shaderentry "ForVertex"
+
 
 project "Sandbox"
     location "Sandbox"
@@ -129,6 +139,8 @@ project "Sandbox"
         postbuildcommands
         {
             ("{COPY} ../bin/" .. outputdir .. "/Murphy/Murphy.dll ../bin/" .. outputdir .. "/Sandbox"),
+            ("{COPY} ../bin/" .. outputdir .. "/Murphy/*.cso ../bin/" .. outputdir .. "/Sandbox"),
+            ("{COPY} ../bin/" .. outputdir .. "/Murphy/*.cso ."),
             ("{COPY} ../Murphy/vendor/SFML-2.5.1/bin/* ../bin/" .. outputdir .. "/Sandbox")
         }
 

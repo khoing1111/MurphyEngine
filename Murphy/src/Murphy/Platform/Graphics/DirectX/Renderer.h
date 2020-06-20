@@ -1,6 +1,7 @@
 #pragma once
 
 #include <d3d11.h>
+#include <d3dcompiler.h>
 #include <wrl.h>
 
 #include "Murphy/Core.h"
@@ -112,6 +113,9 @@ namespace Murphy::DirectX
                 &m_RenderTarget
             );
 
+            // Bind output render target
+            m_DeviceContext->OMSetRenderTargets(1u, m_RenderTarget.GetAddressOf(), nullptr);
+
             return true;
         }
 
@@ -125,6 +129,100 @@ namespace Murphy::DirectX
             m_SwapChain->Present(1u, 0u);
         }
 
+        virtual bool Renderer::Draw() const override
+        {
+            HRESULT hr;
+            const UINT stride = sizeof(Murphy::Vertex3F);
+            const Murphy::Vertex3F vertices[] =
+            {
+                {0.0f, 0.5f, 0.0f},
+                {0.5f, -0.5f, 0.0f},
+                {-0.5f, -0.5f, 0.0f},
+            };
+
+
+            MP_COMPTR<ID3D11Buffer> vertexBuffer;
+
+            D3D11_BUFFER_DESC vertexBufferDesc = {};
+            vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+            vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+            vertexBufferDesc.CPUAccessFlags = 0u;
+            vertexBufferDesc.MiscFlags = 0u;
+            vertexBufferDesc.ByteWidth = sizeof(vertices);
+            vertexBufferDesc.StructureByteStride = stride;
+
+            D3D11_SUBRESOURCE_DATA vertexSubResourceData = {};
+            vertexSubResourceData.pSysMem = vertices;
+
+            if (FAILED(hr = m_Device->CreateBuffer(&vertexBufferDesc, &vertexSubResourceData, vertexBuffer.GetAddressOf())))
+                return false;
+
+            const UINT offset = 0u;
+            m_DeviceContext->IASetVertexBuffers(0u, 1u, vertexBuffer.GetAddressOf(), &stride, &offset);
+
+            // Load Vertex Shader
+            MP_COMPTR<ID3D11VertexShader> vertexShader;
+            MP_COMPTR<ID3DBlob> blob;
+            if (FAILED(hr = D3DReadFileToBlob(L"VertexShader-vs.cso", &blob)))
+                return false;
+
+            if (FAILED(hr = m_Device->CreateVertexShader(
+                blob->GetBufferPointer(), blob->GetBufferSize(), 
+                nullptr, vertexShader.GetAddressOf())
+            ))
+                return false;
+
+            m_DeviceContext->VSSetShader(vertexShader.Get(), 0, 0);
+
+            // Describe input layout
+            MP_COMPTR<ID3D11InputLayout> inputLayout;
+            const D3D11_INPUT_ELEMENT_DESC inputElemDesc[] =
+            {
+                {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0}
+            };
+
+            if (FAILED(hr = m_Device->CreateInputLayout(
+                inputElemDesc, std::size(inputElemDesc),
+                blob->GetBufferPointer(), blob->GetBufferSize(),
+                inputLayout.GetAddressOf()
+            )))
+                return false;
+
+            m_DeviceContext->IASetInputLayout(inputLayout.Get());
+
+            // Load Pixel Shader
+            MP_COMPTR<ID3D11PixelShader> pixelShader;
+            if (FAILED(hr = D3DReadFileToBlob(L"PixelShader-ps.cso", &blob)))
+                return false;
+
+            if (FAILED(hr = m_Device->CreatePixelShader(
+                blob->GetBufferPointer(), blob->GetBufferSize(), 
+                nullptr, pixelShader.GetAddressOf())
+            ))
+                return false;
+
+            m_DeviceContext->PSSetShader(pixelShader.Get(), 0, 0);
+
+            // Configure Vieport
+            D3D11_VIEWPORT viewport;
+            viewport.Width = m_Window.GetWidth();
+            viewport.Height = m_Window.GetHeight();
+            viewport.MinDepth = 0;
+            viewport.MaxDepth = 1;
+            viewport.TopLeftX = 0;
+            viewport.TopLeftY = 0;
+
+            m_DeviceContext->RSSetViewports(1u, &viewport);
+
+            // Set Primitive Topology
+            m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+            // Draw vertices
+            m_DeviceContext->Draw((UINT)std::size(vertices), 0u);
+
+            return true;
+        }
+
     private:
         MP_COMPTR<ID3D11Device> m_Device;
         MP_COMPTR<IDXGISwapChain> m_SwapChain;
@@ -132,4 +230,3 @@ namespace Murphy::DirectX
         MP_COMPTR<ID3D11RenderTargetView> m_RenderTarget;
     };
 }
-

@@ -156,6 +156,8 @@
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Debug-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Debug-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -181,6 +183,8 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\Murphy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Debug-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Debug-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -210,6 +214,8 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Release-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Release-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso ..\bin\Release-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Release-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -239,6 +245,8 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Release-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\Murphy.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Release-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso ..\bin\Release-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Release-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -268,6 +276,8 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Dist-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Dist-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -297,6 +307,8 @@ IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\
     </ProjectReference>
     <PostBuildEvent>
       <Command>IF EXIST ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\Murphy.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Dist-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)
+IF EXIST ..\bin\Dist-windows-x86_64\Murphy\*.cso\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Murphy\*.cso &gt; nul)
 IF EXIST ..\Murphy\vendor\SFML-2.5.1\bin\*\ (xcopy /Q /E /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\Murphy\vendor\SFML-2.5.1\bin\* ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

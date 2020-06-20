@@ -37,4 +37,9 @@ namespace Murphy
         extern const RGBColor Green;
         extern const RGBColor Blue;
     }
+
+    struct Vertex3F
+    {
+        float x, y, z;
+    };
 }

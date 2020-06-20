@@ -336,6 +336,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="src\Murphy\Platform\Graphics\DirectX\Shaders\PixelShader-ps.hlsl">
+      <ShaderType>Pixel</ShaderType>
+      <EntryPointName>ForPixel</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="src\Murphy\Platform\Graphics\DirectX\Shaders\VertexShader-vs.hlsl">
+      <ShaderType>Vertex</ShaderType>
+      <EntryPointName>ForVertex</EntryPointName>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="vendor\imgui-1.76\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>

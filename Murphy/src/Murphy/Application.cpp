@@ -76,6 +76,8 @@ namespace Murphy
 
             m_Renderer.ClearFrame(Murphy::Color::White);
 
+            m_Renderer.Draw();
+
             //for (Layer* layer : m_LayerStack)
             //    layer->Render(m_Renderer);
 
