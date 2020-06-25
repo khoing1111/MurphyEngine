@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+#include <exception>
+
 #ifdef MP_PLATFORM_WINDOWS
     #include <Windows.h>
 #endif

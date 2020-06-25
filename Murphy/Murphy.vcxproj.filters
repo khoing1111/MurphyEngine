@@ -34,18 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Murphy.h" />
-    <ClInclude Include="src\Murphy\2D\Core.h">
-      <Filter>Murphy\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Murphy\2D\Geometry.h">
-      <Filter>Murphy\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Murphy\2D\Shape.h">
-      <Filter>Murphy\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Murphy\2D\Vertices.h">
-      <Filter>Murphy\2D</Filter>
-    </ClInclude>
     <ClInclude Include="src\Murphy\Application.h">
       <Filter>Murphy</Filter>
     </ClInclude>
@@ -56,9 +44,6 @@
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\Graphics\Core.h">
-      <Filter>Murphy\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Murphy\Graphics\Geometry.h">
       <Filter>Murphy\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Murphy\Graphics\Renderer.h">
@@ -88,6 +73,9 @@
     <ClInclude Include="src\Murphy\Log.h">
       <Filter>Murphy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Core.h">
+      <Filter>Murphy\Platform\Graphics\DirectX</Filter>
+    </ClInclude>
     <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Renderer.h">
       <Filter>Murphy\Platform\Graphics\DirectX</Filter>
     </ClInclude>
@@ -98,24 +86,25 @@
       <Filter>Murphy</Filter>
     </ClInclude>
     <ClInclude Include="src\mppch.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\VertexBuffer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\IndexBuffer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\ConstantBuffer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Bindable.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Drawable.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\IAStage.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\InputLayout.h" />
+    <ClInclude Include="src\Murphy\Exceptions.h" />
+    <ClInclude Include="src\Murphy\Platform\Windows\Exceptions.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Exceptions.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Shaders.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Drawables\Rect.h" />
+    <ClInclude Include="src\Murphy\Graphics\Drawable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Murphy\2D\Geometry.cpp">
-      <Filter>Murphy\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Murphy\2D\Shape.cpp">
-      <Filter>Murphy\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Murphy\2D\Vertices.cpp">
-      <Filter>Murphy\2D</Filter>
-    </ClCompile>
     <ClCompile Include="src\Murphy\Application.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Graphics\Core.cpp">
-      <Filter>Murphy\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp">
       <Filter>Murphy\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Murphy\Graphics\Renderer.cpp">
@@ -133,6 +122,9 @@
     <ClCompile Include="src\Murphy\Log.cpp">
       <Filter>Murphy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Core.cpp">
+      <Filter>Murphy\Platform\Graphics\DirectX</Filter>
+    </ClCompile>
     <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Renderer.cpp">
       <Filter>Murphy\Platform\Graphics\DirectX</Filter>
     </ClCompile>
@@ -140,6 +132,7 @@
       <Filter>Murphy\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\mppch.cpp" />
+    <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Drawables\Rect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="src\Murphy\Platform\Graphics\DirectX\Shaders\PixelShader-ps.hlsl">

@@ -145,6 +145,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -168,6 +169,7 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,6 +196,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -221,6 +224,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -248,6 +252,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -275,6 +280,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -290,15 +296,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Murphy.h" />
-    <ClInclude Include="src\Murphy\2D\Core.h" />
-    <ClInclude Include="src\Murphy\2D\Geometry.h" />
-    <ClInclude Include="src\Murphy\2D\Shape.h" />
-    <ClInclude Include="src\Murphy\2D\Vertices.h" />
     <ClInclude Include="src\Murphy\Application.h" />
     <ClInclude Include="src\Murphy\Core.h" />
     <ClInclude Include="src\Murphy\EntryPoint.h" />
+    <ClInclude Include="src\Murphy\Exceptions.h" />
+    <ClInclude Include="src\Murphy\Graphics\Drawable.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Bindable.h" />
     <ClInclude Include="src\Murphy\Graphics\Core.h" />
-    <ClInclude Include="src\Murphy\Graphics\Geometry.h" />
     <ClInclude Include="src\Murphy\Graphics\Renderer.h" />
     <ClInclude Include="src\Murphy\IO\Event.h" />
     <ClInclude Include="src\Murphy\IO\MouseEvents.h" />
@@ -308,25 +312,34 @@
     <ClInclude Include="src\Murphy\LayerStack.h" />
     <ClInclude Include="src\Murphy\Layers\ImGuiLayer.h" />
     <ClInclude Include="src\Murphy\Log.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\ConstantBuffer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Core.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Drawable.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Drawables\Rect.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Exceptions.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\IAStage.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\IndexBuffer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\InputLayout.h" />
     <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Renderer.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\Shaders.h" />
+    <ClInclude Include="src\Murphy\Platform\Windows\Exceptions.h" />
     <ClInclude Include="src\Murphy\Platform\Windows\Window.h" />
     <ClInclude Include="src\Murphy\Window.h" />
     <ClInclude Include="src\mppch.h" />
+    <ClInclude Include="src\Murphy\Platform\Graphics\DirectX\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Murphy\2D\Geometry.cpp" />
-    <ClCompile Include="src\Murphy\2D\Shape.cpp" />
-    <ClCompile Include="src\Murphy\2D\Vertices.cpp" />
     <ClCompile Include="src\Murphy\Application.cpp" />
     <ClCompile Include="src\Murphy\Graphics\Core.cpp" />
-    <ClCompile Include="src\Murphy\Graphics\Geometry.cpp">
-      <ObjectFileName>$(IntDir)\Geometry1.obj</ObjectFileName>
-    </ClCompile>
     <ClCompile Include="src\Murphy\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Murphy\Layer.cpp" />
     <ClCompile Include="src\Murphy\LayerStack.cpp" />
     <ClCompile Include="src\Murphy\Layers\ImGuiLayer.cpp" />
     <ClCompile Include="src\Murphy\Log.cpp" />
+    <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Core.cpp">
+      <ObjectFileName>$(IntDir)\Core1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Drawables\Rect.cpp" />
     <ClCompile Include="src\Murphy\Platform\Graphics\DirectX\Renderer.cpp">
       <ObjectFileName>$(IntDir)\Renderer1.obj</ObjectFileName>
     </ClCompile>

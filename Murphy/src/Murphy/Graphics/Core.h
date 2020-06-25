@@ -38,8 +38,23 @@ namespace Murphy
         extern const RGBColor Blue;
     }
 
-    struct Vertex3F
+    struct MURPHY_API Vector2F
     {
-        float x, y, z;
+        float X, Y;
+
+        Vector2F();
+        Vector2F(float x, float y);
+
+        Vector2F& operator=(const Vector2F& source);
+    };
+
+    struct MURPHY_API Vector3F
+    {
+        float X, Y, Z;
+    };
+
+    struct MURPHY_API Matrix4x4
+    {
+        float elem[4][4];
     };
 }

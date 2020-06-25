@@ -15,7 +15,7 @@ namespace Murphy
         virtual bool Init() = 0;
 
         virtual void ClearFrame(const RGBAColor&) = 0;
-        virtual bool Draw() const = 0;
+        virtual bool Draw() = 0;
         virtual void EndFrame() = 0;
 
     protected:

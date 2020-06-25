@@ -4,13 +4,12 @@
 
 #include <SFML/System/Clock.hpp>
 #include "Murphy/Layers/ImGuiLayer.h"
-#include "Murphy/2D/Shape.h"
 
 
 namespace Murphy
 {
-    Application::Application(Window& window, Renderer& renderer)
-        : m_Window(window), m_Renderer(renderer)
+    Application::Application(Window& window, Renderer& renderer, MP_SPTR<Drawable> rect)
+        : m_Window(window), m_Renderer(renderer), m_Rect(rect)
     {
         // Setup Window Event Dispatchers
         auto anyEventDispatcher = new IO::AnyEventDispatcher(
@@ -77,7 +76,7 @@ namespace Murphy
             m_Renderer.ClearFrame(Murphy::Color::White);
 
             m_Renderer.Draw();
-
+            m_Rect->Draw(&m_Renderer);
             //for (Layer* layer : m_LayerStack)
             //    layer->Render(m_Renderer);
 

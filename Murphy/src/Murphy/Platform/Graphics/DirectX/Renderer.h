@@ -2,14 +2,14 @@
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 #include <wrl.h>
 
 #include "Murphy/Core.h"
 #include "Murphy/Graphics/Renderer.h"
 #include "Murphy/Platform/Windows/Window.h"
 
-
-#define MP_COMPTR Microsoft::WRL::ComPtr
+#include "Core.h"
 
 namespace Murphy::DirectX
 {
@@ -25,11 +25,14 @@ namespace Murphy::DirectX
 
         virtual bool Init() override
         {
+            unsigned int windowWidth = m_Window.GetWidth();
+            unsigned int windowHeight = m_Window.GetHeight();
+
             // Setup Swap chain Description
             DXGI_SWAP_CHAIN_DESC sd = {};
             sd.BufferCount = 1;
-            sd.BufferDesc.Width = m_Window.GetWidth();
-            sd.BufferDesc.Height = m_Window.GetHeight();
+            sd.BufferDesc.Width = windowWidth;
+            sd.BufferDesc.Height = windowHeight;
             sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
             sd.BufferDesc.RefreshRate.Numerator = 60;
             sd.BufferDesc.RefreshRate.Denominator = 1;
@@ -113,8 +116,43 @@ namespace Murphy::DirectX
                 &m_RenderTarget
             );
 
-            // Bind output render target
-            m_DeviceContext->OMSetRenderTargets(1u, m_RenderTarget.GetAddressOf(), nullptr);
+            // Create depth stencil state
+            D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
+            depthStencilDesc.DepthEnable = true;
+            depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+            depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+
+            MP_COMPTR<ID3D11DepthStencilState> depthStencilState;
+            m_Device->CreateDepthStencilState(&depthStencilDesc, depthStencilState.GetAddressOf());
+
+            // Bind depth stencil to output merger
+            m_DeviceContext->OMSetDepthStencilState(depthStencilState.Get(), 1u);
+
+            // Create Depth Stencil texture
+            MP_COMPTR<ID3D11Texture2D> depthStencilTexture;
+            D3D11_TEXTURE2D_DESC textureDesc = {};
+            textureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+            textureDesc.Width = windowWidth;
+            textureDesc.Height = windowHeight;
+            textureDesc.MipLevels = 1u;
+            textureDesc.ArraySize = 1u;
+            textureDesc.Format = DXGI_FORMAT_D32_FLOAT;
+            textureDesc.SampleDesc.Count = 1u;
+            textureDesc.SampleDesc.Quality = 0u;
+            textureDesc.Usage = D3D11_USAGE_DEFAULT;
+
+            m_Device->CreateTexture2D(&textureDesc, nullptr, depthStencilTexture.GetAddressOf());
+
+            // Create Depth Stencil View
+            D3D11_DEPTH_STENCIL_VIEW_DESC depthStenciViewDesc = {};
+            depthStenciViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
+            depthStenciViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+            depthStenciViewDesc.Texture2D.MipSlice = 0u;
+
+            m_Device->CreateDepthStencilView(depthStencilTexture.Get(), &depthStenciViewDesc, m_DepthStencilView.GetAddressOf());
+
+            // Bind Render Target and Depth Stencil View to OM state
+            m_DeviceContext->OMSetRenderTargets(1u, m_RenderTarget.GetAddressOf(), m_DepthStencilView.Get());
 
             return true;
         }
@@ -122,6 +160,7 @@ namespace Murphy::DirectX
         virtual void ClearFrame(const Murphy::RGBAColor& color) override
         {
             m_DeviceContext->ClearRenderTargetView(m_RenderTarget.Get(), color.ToFloatArray().data());
+            m_DeviceContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
         }
 
         virtual void EndFrame() override
@@ -129,80 +168,8 @@ namespace Murphy::DirectX
             m_SwapChain->Present(1u, 0u);
         }
 
-        virtual bool Renderer::Draw() const override
+        virtual bool Renderer::Draw() override
         {
-            HRESULT hr;
-            const UINT stride = sizeof(Murphy::Vertex3F);
-            const Murphy::Vertex3F vertices[] =
-            {
-                {0.0f, 0.5f, 0.0f},
-                {0.5f, -0.5f, 0.0f},
-                {-0.5f, -0.5f, 0.0f},
-            };
-
-
-            MP_COMPTR<ID3D11Buffer> vertexBuffer;
-
-            D3D11_BUFFER_DESC vertexBufferDesc = {};
-            vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-            vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-            vertexBufferDesc.CPUAccessFlags = 0u;
-            vertexBufferDesc.MiscFlags = 0u;
-            vertexBufferDesc.ByteWidth = sizeof(vertices);
-            vertexBufferDesc.StructureByteStride = stride;
-
-            D3D11_SUBRESOURCE_DATA vertexSubResourceData = {};
-            vertexSubResourceData.pSysMem = vertices;
-
-            if (FAILED(hr = m_Device->CreateBuffer(&vertexBufferDesc, &vertexSubResourceData, vertexBuffer.GetAddressOf())))
-                return false;
-
-            const UINT offset = 0u;
-            m_DeviceContext->IASetVertexBuffers(0u, 1u, vertexBuffer.GetAddressOf(), &stride, &offset);
-
-            // Load Vertex Shader
-            MP_COMPTR<ID3D11VertexShader> vertexShader;
-            MP_COMPTR<ID3DBlob> blob;
-            if (FAILED(hr = D3DReadFileToBlob(L"VertexShader-vs.cso", &blob)))
-                return false;
-
-            if (FAILED(hr = m_Device->CreateVertexShader(
-                blob->GetBufferPointer(), blob->GetBufferSize(), 
-                nullptr, vertexShader.GetAddressOf())
-            ))
-                return false;
-
-            m_DeviceContext->VSSetShader(vertexShader.Get(), 0, 0);
-
-            // Describe input layout
-            MP_COMPTR<ID3D11InputLayout> inputLayout;
-            const D3D11_INPUT_ELEMENT_DESC inputElemDesc[] =
-            {
-                {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0}
-            };
-
-            if (FAILED(hr = m_Device->CreateInputLayout(
-                inputElemDesc, std::size(inputElemDesc),
-                blob->GetBufferPointer(), blob->GetBufferSize(),
-                inputLayout.GetAddressOf()
-            )))
-                return false;
-
-            m_DeviceContext->IASetInputLayout(inputLayout.Get());
-
-            // Load Pixel Shader
-            MP_COMPTR<ID3D11PixelShader> pixelShader;
-            if (FAILED(hr = D3DReadFileToBlob(L"PixelShader-ps.cso", &blob)))
-                return false;
-
-            if (FAILED(hr = m_Device->CreatePixelShader(
-                blob->GetBufferPointer(), blob->GetBufferSize(), 
-                nullptr, pixelShader.GetAddressOf())
-            ))
-                return false;
-
-            m_DeviceContext->PSSetShader(pixelShader.Get(), 0, 0);
-
             // Configure Vieport
             D3D11_VIEWPORT viewport;
             viewport.Width = m_Window.GetWidth();
@@ -214,19 +181,20 @@ namespace Murphy::DirectX
 
             m_DeviceContext->RSSetViewports(1u, &viewport);
 
-            // Set Primitive Topology
-            m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-            // Draw vertices
-            m_DeviceContext->Draw((UINT)std::size(vertices), 0u);
-
             return true;
         }
+
+        ID3D11Device* GetDevice();
+        IDXGISwapChain* GetSwapChain();
+        ID3D11DeviceContext* GetDeviceContext();
+        ID3D11RenderTargetView* GetRenderTargetView();
+        ID3D11DepthStencilView* GetDepthStencilView();
 
     private:
         MP_COMPTR<ID3D11Device> m_Device;
         MP_COMPTR<IDXGISwapChain> m_SwapChain;
         MP_COMPTR<ID3D11DeviceContext> m_DeviceContext;
         MP_COMPTR<ID3D11RenderTargetView> m_RenderTarget;
+        MP_COMPTR<ID3D11DepthStencilView> m_DepthStencilView;
     };
 }
